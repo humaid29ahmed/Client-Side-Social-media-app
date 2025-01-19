@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = axios.create({baseURL:'http://localhost:5000'});
+const API = axios.create({baseURL:'https://client-side-social-media-app.onrender.com'});
 
 
 /* Before any request this interceptor sets the req.headers.Authorization 
