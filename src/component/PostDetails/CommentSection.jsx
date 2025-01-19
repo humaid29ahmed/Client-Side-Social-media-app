@@ -22,7 +22,7 @@ const CommentSection = ({post}) => {
     <div>
         <Typography variant='h6'>Comments</Typography>
         <Divider/>
-        <div className={classes.commentsOuterSection}>
+        {user ? (<div className={classes.commentsOuterSection}>
             <div className={classes.commentsInnerSection}>
                 {comments.map((comment,i)=><Typography variant='subtitle1' key={i}><strong>{comment.split(':')[0]}</strong> {comment.split(':')[1]}</Typography>)}
                 <div ref={currentComment}/>
@@ -41,7 +41,7 @@ const CommentSection = ({post}) => {
                 submit
             </Button>
             </div>
-        </div>
+        </div>): <Typography variant='h5'>Please log in to comment on this post</Typography>}
     </div>
   )
 }
