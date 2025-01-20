@@ -1,11 +1,12 @@
 import React from 'react'
 import {useEffect, useState} from "react";
-import {Container, Grow, Grid,Paper, AppBar, TextField, Button} from "@material-ui/core";
+import { Autocomplete } from '@material-ui/lab';
+import {Container, Grow, Grid,Paper, AppBar, TextField, Button,Chip} from "@material-ui/core";
 import Posts from "../posts/posts";
 import Form from "../form/form";
 import { useDispatch, useSelector } from "react-redux";
 import {useHistory, useLocation} from "react-router-dom";
-import ChipInput from "material-ui-chip-input";
+// import ChipInput from "material-ui-chip-input";
 import {getPosts,getPostBySearch} from "../../actions/post.js";
 import makeStyles from "./styles.js";
 import Paginate from '../Pagination/Pagination.jsx';
@@ -43,10 +44,6 @@ const Home = () => {
         }
 
     };
-
-    const handleAdd = (tag)=>setTags(([...tags, tag]));
-    const handleDelete = (tagToDelete)=>setTags(tags.filter((tag)=>tagToDelete!==tag));
-
   return (
     <Grow in>
     <Container maxWidth='xl'>
@@ -65,13 +62,31 @@ const Home = () => {
                     fullWidth
                     variant='outlined'
                     />
-                    <ChipInput
+                    {/* <ChipInput
                     label='Search Tags'
                     onAdd={handleAdd}
                     onDelete={handleDelete}
                     value={tags}
                     style={{margin:'10px 0'}}
-                    variant='outlined'/>
+                    variant='outlined'/> */}
+
+        <Autocomplete
+             multiple
+             id="tags-filled"
+             options={[]}
+             defaultValue={[]}
+             onChange={(e,value)=>setTags((state)=>value)}
+             freeSolo={true}
+             renderTags={(value, getTagProps) =>
+             value.map((option, index) => (
+             <Chip variant="outlined" label={option} {...getTagProps({ index })} />
+             ))
+             }
+             renderInput={(params) => (
+              <TextField {...params} style={{margin:'10px 0'}} variant="outlined" label="Search by Tags" placeholder="press enter after a tag" />
+              )}
+            />
+                    
 
                     <Button variant='contained' style={{margin:'10px 0'}} color='primary'onClick={handleSearchPost} fullWidth >Search</Button>
                 </AppBar>

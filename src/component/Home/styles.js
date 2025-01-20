@@ -16,5 +16,13 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.down('xs')]: {
       flexDirection: 'column-reverse',
     },
+    root: {
+      display: 'flex',
+      justifyContent: 'center',
+      flexWrap: 'wrap',
+      listStyle: 'none',
+      padding: theme.spacing(0.5),
+      margin: 0,
+    },
   },
 }));
